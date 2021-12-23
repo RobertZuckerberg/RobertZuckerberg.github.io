@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"robertzuckerberg.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Towards Playing Full MOBA Games with Deep Reinforcement Learning原文链接：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2011.12692 原文开源代码：暂无 摘要MOBA游戏，例如王者荣耀，英雄联盟和Dota2，对AI系统构成很大的挑战，如multi-agent，巨大的状态动作空间，复杂的动作控制等。开发一个能够玩Moba游戏的AI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文笔记 Towards Playing Full MOBA Games with Deep Reinforcement Learning">
+<meta property="og:url" content="https://robertzuckerberg.github.io/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Towards%20Playing%20Full%20MOBA%20Games%20with%20Deep%20Reinforcement%20Learning/index.html">
+<meta property="og:site_name" content="藏室">
+<meta property="og:description" content="Towards Playing Full MOBA Games with Deep Reinforcement Learning原文链接：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;2011.12692 原文开源代码：暂无 摘要MOBA游戏，例如王者荣耀，英雄联盟和Dota2，对AI系统构成很大的挑战，如multi-agent，巨大的状态动作空间，复杂的动作控制等。开发一个能够玩Moba游戏的AI">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-22T23:51:35.000Z">
+<meta property="article:modified_time" content="2021-12-23T01:03:41.502Z">
+<meta property="article:author" content="朱睿智">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="深度强化学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robertzuckerberg.github.io/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Towards%20Playing%20Full%20MOBA%20Games%20with%20Deep%20Reinforcement%20Learning/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>论文笔记 Towards Playing Full MOBA Games with Deep Reinforcement Learning | 藏室</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">藏室</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/photos/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robertzuckerberg.github.io/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Towards%20Playing%20Full%20MOBA%20Games%20with%20Deep%20Reinforcement%20Learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="朱睿智">
+      <meta itemprop="description" content="生活点滴 & 学习记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="藏室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          论文笔记 Towards Playing Full MOBA Games with Deep Reinforcement Learning
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-23 07:51:35 / 修改时间：09:03:41" itemprop="dateCreated datePublished" datetime="2021-12-23T07:51:35+08:00">2021-12-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度强化学习</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.2k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Towards-Playing-Full-MOBA-Games-with-Deep-Reinforcement-Learning"><a href="#Towards-Playing-Full-MOBA-Games-with-Deep-Reinforcement-Learning" class="headerlink" title="Towards Playing Full MOBA Games with Deep Reinforcement Learning"></a>Towards Playing Full MOBA Games with Deep Reinforcement Learning</h2><p>原文链接：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2011.12692">https://arxiv.org/abs/2011.12692</a></p>
+<p>原文开源代码：暂无</p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>MOBA游戏，例如王者荣耀，英雄联盟和Dota2，对AI系统构成很大的挑战，如multi-agent，巨大的状态动作空间，复杂的动作控制等。开发一个能够玩Moba游戏的AI已经吸引了大量研究人员的注意。然而，当将OpenAI仅限制在17个英雄的池中Dota AI扩大英雄池时，现有工作无法处理由agent组合形成的动作空间爆炸，即阵容。因此，没有限制的完整Moba游戏远远不能被任何现有的AI系统掌握。在本文中，我们提出了一个MOBA AI的学习框架，该方法能够使用深度强化学习玩所有的MOBA游戏。<strong>具体而言，我们提出将新的学习技巧和现有的学习技巧的组合，包括curriculum self-play学习，策略蒸馏，离线策略适应，多头值估计和蒙特卡罗树搜索，以在一个大的英雄池上训练和玩游戏</strong>。王者荣耀是一个受欢迎的MOBA游戏，我们展示了如何构建可以击败顶级电子竞技玩家的超级AI agent。通过对本文中的Moba AI agent进行大规模的性能测试，证明了我们AI的优势。<span id="more"></span></p>
+<h3 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h3><p>用于玩游戏的人工智能，也称为游戏AI，已经被持续研究了几十年。我们目睹了AI agent在许多类型游戏上的成功，包括围棋，雅达利系列，第一人称射击（FPS）游戏（如夺旗赛），电子游戏（如任天堂明星大乱斗）以及卡牌游戏（如扑克）等等 。现如今，具有复杂策略的电子游戏吸引了人们的关注，因为它们捕捉了真实世界的性质，例如，2019年，AlphaStar在通用实时策略（RTS）游戏（StarCraft 2）中达到了grandmaster段位。</p>
+<p>作为RTS游戏的子类型，多人在线竞技游戏（MOBA）最近也引起了很多关注。<strong>由于其游戏机制涉及多个agent进行竞争和合作，并且包含不全面的信息，复杂的动作控制和巨大的状态空间，MOBA被认为是AI研究优选的测试平台</strong>。典型的MOBA游戏包括王者荣耀，Dota和英雄联盟。在复杂性方面，一个MOBA游戏（例如王者荣耀），即使具有显着的离散性，也可以具有$10^{20000}$数量级的状态和动作空间，而传统的游戏AI测试平台最多是 $10^{360}$数量级。 MOBA游戏通过使用多个英雄，从而使实时策略进一步复杂化（每个英雄具有独特的技能，旨在拥有不同的游戏机制），特别是在5V5模式中，两支队伍（每支都有5位选手从英雄池中选择的英雄） ）相互竞争的情况。</p>
+<p>尽管它适用于AI研究，要想掌握了MOBA游戏仍然是当前AI系统一个重大的挑战。目前针对MOBA 5v5游戏最好的工作是OpenAI Five，其使用self-play强化学习（RL）在Dota2中训练agent。然而，OpenAI Five训练受到一个主要的限制，即只能使用17个英雄，然而英雄机制，团队协作和竞争才是MOBA游戏的灵魂。</p>
+<p>作为能够玩所有MOBA游戏的最重要的基础，扩增英雄池对self-play强化学习是一个重大的挑战，因为agent相互组合（即阵容），与英雄池大小的数量呈多项式增长。17个英雄池的agent组合为 4,900,896(<script type="math/tex">C_{17}^{10} \times C_{10}^{5}</script>)，当增加到40个英雄池时，组合爆炸到 213,610,453,056（<script type="math/tex">C_{40}^{10} \times C_{10}^{5}</script>）。<strong>考虑到每个MOBA英雄是独一无二的，即使是经验丰富的人类玩家也具有特定的英雄池，通过随机使用任意英雄的组合来进行学习的现有方法可能会导致“学习崩溃”，这可在OpenAI Five和我们的实验中观察到</strong>。例如，OpenAI试图将英雄池扩展到25个英雄，会导致训练变得缓慢而不可接受，同时还降低了AI的性能（可从文献[24]中了解“更多英雄”的细节）。因此，我们需要MOBA AI学习一个方法，这些方法能处理由扩展英雄池引起的可扩展性相关问题。</p>
+<p>在本文中，我们提出了一个学习框架，用于支持使用深度强化学习玩所有的MOBA游戏。在 actor-learner 模式下，我们首先构建一个分布式的RL基础架构，以off-policy方式生成训练数据。然后，我们开发一个统一的actor-critic网络架构，以捕捉不同英雄的游戏机制和动作。要处理由游戏情节的多样性造成的策略偏差，我们应用off-policy adaption，与[38]类似。为了管理游戏中的状态动作的不确定值，我们通过分组奖励将多值估计引入MOBA。受自神经网络curriculum learning想法的启发，我们为MOBA游戏multi-agen的t训练设计了课程，我们一开始使游戏简单，然后再逐渐增加学习难度。特别地，我们从固定阵容开始获取teacher模型，我们从中蒸馏策略，最后我们执行合并的训练。我们利用student-driven的策略蒸馏来将知识从简单的任务转移到困难的任务。最后，开始考虑扩展英雄池这一个新的问题，即在游戏开始时进行英雄选择。用于在小英雄池中使用的Minimax算法不可行。为了处理这一点，我们开发基于Monte-Carlo树搜索（MCT）的高效且有效的agent。</p>
+<p>请注意，由于在真实游戏中评估AI agent的代价昂贵，目前在文献中仍然缺乏对游戏AI的大规模性能测试。例如，AlphaStar Final和OpenAI Five被进行如下测试：1）分别与专业人士进行了11场比赛和8场比赛；2）分别与公众进行90场和7,257场比赛（所有级别的玩家都可以参加，没有进入条件）。为了提供更大的统计学意义的评估，我们进行了大规模的MOBA AI测试。具体而言，我们使用王者荣耀进行测试，这是一个受欢迎并且经典的typical游戏，这已被广泛用作最近AI的测试平台。在42次与专业选手的比赛中，AI胜率为95.2%，而在与高段位玩家的 642047 场比赛，AI胜率为97.7%。</p>
+<p>总而言之，我们的贡献有：</p>
+<ul>
+<li>我们提出了一种新的 MOBA AI学习框架，以便使用强化学习玩所有的MOBA游戏。</li>
+<li>我们开展了MOBA AI agent的第一个大规模性能测试。广泛的实验表明，我们的AI可以击败顶级的电子竞技玩家。</li>
+</ul>
+<h3 id="相关工作"><a href="#相关工作" class="headerlink" title="相关工作"></a>相关工作</h3><p>我们的工作属于针对策略类电子游戏的系统级AI开发，因此我们主要讨论沿着这条线的代表工作，主要包括RTS和MOBA游戏。</p>
+<p><strong>General RTS games</strong>。StarCraft已经多年被作为RTS游戏中用于AI研究的测试平台。现有研究采用的方法包括基于规则的，有监督学习，加强学习及其组合。对于基于规则的方法，代表工作是SAIDA，它是2018年星际争霸AI竞技的冠军（见<a target="_blank" rel="noopener" href="https://github.com/teamsaida/saida）。对于基于学习的方法，最近，AlphaStar联合有监督学习和multi-agent强化学习，并在StarCraft2中达到了grandmaster段位。与AlphaStar的类似，我们的价值估算（第3.2节）也使用不可见的竞争对手的信息。">https://github.com/teamsaida/saida）。对于基于学习的方法，最近，AlphaStar联合有监督学习和multi-agent强化学习，并在StarCraft2中达到了grandmaster段位。与AlphaStar的类似，我们的价值估算（第3.2节）也使用不可见的竞争对手的信息。</a></p>
+<p><strong>MOBA games</strong>。最近，为MOBAGame Ai提出了一个名为Tencent HMS的宏观策略模型。具体地，HMS是用于指导agent在游戏期间应该移动到地图上哪一点的功能组件，其不考虑agent动作的执行，即，电子竞技中的微观控制或微观管理，因此HMS不是完整的AI解决方案。最相关的工作是Tencent Solo和OpenAI Five。Ye et al. 对不同MOBA英雄的游戏机制进行了彻底和系统的研究。他们开发了一个RL系统，用于掌握MOBA战斗中agent的微观控制。但是，这个工作没有研究更复杂的multi-agent 5V5游戏的情况，只研究了1V1 solo游戏。另一方面，<strong>本工作与 Ye et al. 之间的相似之处包括：动作的建模（价值网络是不同的）和离线策略纠正（Adaption）</strong>。2019年，OpenAI提出了一个在Dota2中完5V5游戏的AI，称为OpenAI Five，其具有打败专业人类玩家的能力。OpenAI Five使用了self-paly深度强化学习，并使用近端策略优化（PPO）训练。我们的工作与OpenAI Five的主要区别在于本文的目标是开发能够玩所有MOBA游戏的AI程序。因此，理论上，我们引入了一系列的技术，包括off-policy adaption，curriculum self-play learning，value estimation和tree-search，以解决训练中的可扩展性问题。另一方面，<strong>这项工作与OpenAI Five的相似之处包括：用于建模MOBA英雄的动作空间的设计，使用循环神经网络（如LSTM）处理部分可观察状态，以及使用一个共享权重的模型来控制所有的英雄</strong>。</p>
+<h3 id="学习系统"><a href="#学习系统" class="headerlink" title="学习系统"></a>学习系统</h3><p>为解决MOBA游戏的复杂性，我们将新的技术和现有的学习技术的组合，例如神经网络架构，分布式系统，强化学习，multi-agent训练， curriculum learning和蒙特卡罗树搜索。虽然我们用王者荣耀作为研究平台，但这些技术也适用于其他MOBA游戏，因为MOBA游戏中的游戏机制是相似的。</p>
+<h4 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h4><p>MOBA可以被看作具有部分可观测状态的multi-agent Markov游戏。网络整体架构如图1所示。</p>
+<p>该架构由建模复杂MOBA游戏的通用网络组件组成。为了提供给agent丰富的观测信息，<strong>我们提出建模多模态特征，包括特征由标量和空间特征组成的综合列表</strong>。<strong>标量特征</strong>由可观测的单元属性，游戏中的统计信息和对手的不可见信息组成，例如，健康点（HP），技能冷却时间，金币数，英雄等级等。<strong>空间特征</strong>由从英雄的局部视野中提取的卷积通过组成。为了处理部分可观测性，我们使用LSTM以建模各步骤之间的关系。为了帮助目标选择，我们使用<strong>目标注意力</strong>，其使用LSTM编码后的向量作为query，以编码的游戏单位作为key。为了消除不必要的RL探索过程，类似于[38]，我们设计<strong>动作屏蔽机制</strong>。为了管理MOBA的动作组合空间，我们提出一个<strong>分离的动作目标</strong>。具体而言，AI在分离的目标中输出如下预测的动作：1）采取哪些动作，例如移动，攻击，技能释放等；2）动作使用的目标，例如炮塔，敌人英雄或其他人；3）动作使用的范围，例如离散化的移动方向，技能释放方向。</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信公众号</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 深度强化学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/04/%E7%9F%A9%E9%98%B5%E7%90%86%E8%AE%BA%E8%80%83%E6%A0%B8/" rel="prev" title="矩阵理论考核">
+      <i class="fa fa-chevron-left"></i> 矩阵理论考核
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Towards-Playing-Full-MOBA-Games-with-Deep-Reinforcement-Learning"><span class="nav-number">1.</span> <span class="nav-text">Towards Playing Full MOBA Games with Deep Reinforcement Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.2.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.3.</span> <span class="nav-text">相关工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%B3%BB%E7%BB%9F"><span class="nav-number">1.4.</span> <span class="nav-text">学习系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Architecture"><span class="nav-number">1.4.1.</span> <span class="nav-text">Architecture</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱睿智"
+      src="/images/author.jpg">
+  <p class="site-author-name" itemprop="name">朱睿智</p>
+  <div class="site-description" itemprop="description">生活点滴 & 学习记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RobertZuckerberg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RobertZuckerberg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:adolfduke0711@gmail.com" title="E-Mail → mailto:adolfduke0711@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5465098393" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;5465098393" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱睿智</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">5k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">4 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
