@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"robertzuckerberg.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Machine Learning≈ Looking for Function RegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat something with struc">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「学习笔记」Machine Learning 2021 Spring 台湾大学 李宏毅">
+<meta property="og:url" content="https://robertzuckerberg.github.io/2021/12/25/ML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="藏室">
+<meta property="og:description" content="Machine Learning≈ Looking for Function RegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat something with struc">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-12-24T16:48:51.000Z">
+<meta property="article:modified_time" content="2021-12-24T17:00:50.142Z">
+<meta property="article:author" content="朱睿智">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://robertzuckerberg.github.io/2021/12/25/ML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>「学习笔记」Machine Learning 2021 Spring 台湾大学 李宏毅 | 藏室</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">藏室</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-相册">
+
+    <a href="/photos/" rel="section"><i class="fa fa-camera-retro fa-fw"></i>相册</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://robertzuckerberg.github.io/2021/12/25/ML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/author.jpg">
+      <meta itemprop="name" content="朱睿智">
+      <meta itemprop="description" content="生活点滴 & 学习记录">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="藏室">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          「学习笔记」Machine Learning 2021 Spring 台湾大学 李宏毅
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-12-25 00:48:51 / 修改时间：01:00:50" itemprop="dateCreated datePublished" datetime="2021-12-25T00:48:51+08:00">2021-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h2><p>≈ Looking for Function</p>
+<h4 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h4><p>The function outputs a scalar.</p>
+<h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p>Given options(classes),the function outputs the correct one.</p>
+<h4 id="Structured-Learning"><a href="#Structured-Learning" class="headerlink" title="Structured Learning"></a>Structured Learning</h4><p>creat something with structure(image, document)<span id="more"></span></p>
+<h4 id="How-to-find-a-function"><a href="#How-to-find-a-function" class="headerlink" title="How to find a function?"></a>How to find a function?</h4><ol>
+<li>Function with Unknown Parameters</li>
+<li>Define Loss from Training Data<ul>
+<li>Loss is a function of parameters      L(b,w)</li>
+<li>Loss: how good a set of values is.</li>
+</ul>
+</li>
+<li>Optimization<ul>
+<li>Gradient Descent<ul>
+<li>Local minimal &amp; global minimal</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h5 id="Backpropagation"><a href="#Backpropagation" class="headerlink" title="Backpropagation"></a>Backpropagation</h5><h5 id="Hyper-parameters"><a href="#Hyper-parameters" class="headerlink" title="Hyper parameters"></a>Hyper parameters</h5><ul>
+<li>learning rate</li>
+<li>Sigmoid|ReLU 的个数</li>
+<li>Batch Size</li>
+<li>hidden layer 的层数</li>
+</ul>
+<h5 id="Linear-models"><a href="#Linear-models" class="headerlink" title="Linear models"></a>Linear models</h5><p>Linear models have severe limitation.    <strong>Model Bias</strong></p>
+<h5 id="Activation-function"><a href="#Activation-function" class="headerlink" title="Activation function"></a>Activation function</h5><ul>
+<li><p>Sigmoid Function</p>
+</li>
+<li><p>Rectified Linear Unit(ReLU)</p>
+</li>
+</ul>
+<h5 id="Update-amp-Epoch"><a href="#Update-amp-Epoch" class="headerlink" title="Update &amp; Epoch"></a>Update &amp; Epoch</h5><p>把N笔资料分成一个一个的batch，用batch1算L1，根据L1来算Gradient，用这个Gradient来更新参数。</p>
+<p>接下来再选下一个batch2算L2，根据L2来算Gradient，再更新参数。</p>
+<p>再取下一个batch算出L3，根据L3来算Gradient，再更新参数。</p>
+<p>每次更新一次参数叫做一次Update。</p>
+<p>把所有的batch看过一遍，叫做一个epoch。</p>
+<p>1 epoch = see all the batches once</p>
+<h5 id="Fully-Connect-Feedforward-Network"><a href="#Fully-Connect-Feedforward-Network" class="headerlink" title="Fully Connect Feedforward Network"></a>Fully Connect Feedforward Network</h5><h5 id="Convolutional-Neural-Network-CNN"><a href="#Convolutional-Neural-Network-CNN" class="headerlink" title="Convolutional Neural Network(CNN)"></a>Convolutional Neural Network(CNN)</h5><h4 id="Optimization-Fails-because-……"><a href="#Optimization-Fails-because-……" class="headerlink" title="Optimization Fails because ……"></a>Optimization Fails because ……</h4><p>local minima &amp; saddle point</p>
+<h4 id="Optimization-with-Batch"><a href="#Optimization-with-Batch" class="headerlink" title="Optimization with Batch"></a>Optimization with Batch</h4><h5 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h5><p>1 epoch = see all the batches once ➖&gt; Shuffle after each epoch</p>
+<p>第一个epoch分一次batch</p>
+<p>第二个epoch会重新再分一次batch</p>
+<p>所以哪些资料在同一个batch里面，每一个epoch都不一样，这件事情叫做 Shuffle。</p>
+<h5 id="Small-Batch-v-s-Large-Batch"><a href="#Small-Batch-v-s-Large-Batch" class="headerlink" title="Small Batch v.s. Large Batch"></a>Small Batch v.s. Large Batch</h5><ul>
+<li>Larger batch size does <strong>not</strong> require longer time to compute gradient(unless batch size is too large)</li>
+<li>Smaller batch size requires longer time for one epoch(longer time for seeing all data once)</li>
+<li>Smaller batch size has better performance</li>
+<li>“Noisy” update is better for training</li>
+<li>Smaller batch is better on testing data?</li>
+</ul>
+<p>Batch size is a hyperparameter you have to decide.</p>
+<h5 id="Have-both-fish-and-bear’s-paws"><a href="#Have-both-fish-and-bear’s-paws" class="headerlink" title="Have both fish and bear’s paws?"></a>Have both fish and bear’s paws?</h5><ul>
+<li>Large Batch Optimization for Deep Learning: Training BERT in 76 minutes (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.00962">https://arxiv.org/abs/1904.00962</a>)</li>
+<li>Extremely Large Minibatch SGD: Training ResNet-50 on ImageNet in 15 Minutes (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.04325">https://arxiv.org/abs/1711.04325</a>)</li>
+<li>Stochastic Weight Averaging in Parallel: Large- Batch Training That Generalizes Well (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2001.02312">https://arxiv.org/abs/2001.02312</a>)</li>
+<li>Large Batch Training of Convolutional Networks (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.03888">https://arxiv.org/abs/1708.03888</a>)</li>
+<li>Accurate, large minibatch sgd: Traiaing imagenet in 1 hour (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.02677">https://arxiv.org/abs/1706.02677</a>)</li>
+</ul>
+<h4 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h4><p>(Vanilla)Gradient Descent</p>
+<p>Gradient Descent + Momentum</p>
+<ul>
+<li>Movement: <strong>movement of last step</strong> minus <strong>gradient</strong> at present</li>
+</ul>
+<h4 id="Concluding-Remarks"><a href="#Concluding-Remarks" class="headerlink" title="Concluding Remarks"></a>Concluding Remarks</h4><ul>
+<li>Critical points have zero gradients.</li>
+<li><p>Critical points can be either saddle points or local minima. </p>
+<ul>
+<li>Can be determined by the Hessian matrix.</li>
+<li>It is possible to escape saddle points along the direction of eigenvectors of the Hessian matrix.</li>
+<li>Local minima may be rare.</li>
+</ul>
+</li>
+<li><p>Smaller batch size and momentum help escape critical points.</p>
+</li>
+</ul>
+<h4 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h4><h5 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h5><p>As the training goes, we are closer to the destination,so we reduce the learning rate.</p>
+<h5 id="Warm-Up"><a href="#Warm-Up" class="headerlink" title="Warm Up"></a>Warm Up</h5><p>Increase and then decrease ?</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>欢迎关注我的其它发布渠道</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/images/wechat_channel.jpg">
+            <span class="icon">
+              <i class="fab fa-weixin"></i>
+            </span>
+
+            <span class="label">微信公众号</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Monte%20Carlo%20Neural%20Fictitious%20Self-Play-%20Approach%20to%20Approximate%20Nash%20Equilibrium%20of%20Imperfect-Information%20Games/" rel="prev" title="「论文翻译」Monte Carlo Neural Fictitious Self-Play- Approach to Approximate Nash Equilibrium of Imperfect-Information Games">
+      <i class="fa fa-chevron-left"></i> 「论文翻译」Monte Carlo Neural Fictitious Self-Play- Approach to Approximate Nash Equilibrium of Imperfect-Information Games
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Regression"><span class="nav-number">1.0.1.</span> <span class="nav-text">Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification"><span class="nav-number">1.0.2.</span> <span class="nav-text">Classification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structured-Learning"><span class="nav-number">1.0.3.</span> <span class="nav-text">Structured Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-find-a-function"><span class="nav-number">1.0.4.</span> <span class="nav-text">How to find a function?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Backpropagation"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">Hyper parameters</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-models"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">Linear models</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activation-function"><span class="nav-number">1.0.4.4.</span> <span class="nav-text">Activation function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Update-amp-Epoch"><span class="nav-number">1.0.4.5.</span> <span class="nav-text">Update &amp; Epoch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Fully-Connect-Feedforward-Network"><span class="nav-number">1.0.4.6.</span> <span class="nav-text">Fully Connect Feedforward Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Convolutional-Neural-Network-CNN"><span class="nav-number">1.0.4.7.</span> <span class="nav-text">Convolutional Neural Network(CNN)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-Fails-because-%E2%80%A6%E2%80%A6"><span class="nav-number">1.0.5.</span> <span class="nav-text">Optimization Fails because ……</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-with-Batch"><span class="nav-number">1.0.6.</span> <span class="nav-text">Optimization with Batch</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Shuffle"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">Shuffle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Small-Batch-v-s-Large-Batch"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">Small Batch v.s. Large Batch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Have-both-fish-and-bear%E2%80%99s-paws"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">Have both fish and bear’s paws?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Momentum"><span class="nav-number">1.0.7.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concluding-Remarks"><span class="nav-number">1.0.8.</span> <span class="nav-text">Concluding Remarks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-Rate-Scheduling"><span class="nav-number">1.0.9.</span> <span class="nav-text">Learning Rate Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Learning-Rate-Decay"><span class="nav-number">1.0.9.1.</span> <span class="nav-text">Learning Rate Decay</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Warm-Up"><span class="nav-number">1.0.9.2.</span> <span class="nav-text">Warm Up</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="朱睿智"
+      src="/images/author.jpg">
+  <p class="site-author-name" itemprop="name">朱睿智</p>
+  <div class="site-description" itemprop="description">生活点滴 & 学习记录</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/RobertZuckerberg" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;RobertZuckerberg" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:adolfduke0711@gmail.com" title="E-Mail → mailto:adolfduke0711@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/5465098393" title="微博 → https:&#x2F;&#x2F;weibo.com&#x2F;5465098393" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>微博</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">朱睿智</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">8k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">7 分钟</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
