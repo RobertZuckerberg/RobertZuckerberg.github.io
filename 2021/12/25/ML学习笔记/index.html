@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"robertzuckerberg.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Machine Learning≈ Looking for Function RegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat something with struc">
+  <meta name="description" content="Machine Learning≈ Looking for Function General GuidanceRegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat some">
 <meta property="og:type" content="article">
 <meta property="og:title" content="「学习笔记」Machine Learning 2021 Spring 台湾大学 李宏毅">
 <meta property="og:url" content="https://robertzuckerberg.github.io/2021/12/25/ML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
 <meta property="og:site_name" content="藏室">
-<meta property="og:description" content="Machine Learning≈ Looking for Function RegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat something with struc">
+<meta property="og:description" content="Machine Learning≈ Looking for Function General GuidanceRegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat some">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-24T16:48:51.000Z">
-<meta property="article:modified_time" content="2021-12-24T17:00:50.142Z">
+<meta property="article:modified_time" content="2022-01-03T15:43:35.758Z">
 <meta property="article:author" content="朱睿智">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
@@ -188,10 +188,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-12-25 00:48:51 / 修改时间：01:00:50" itemprop="dateCreated datePublished" datetime="2021-12-25T00:48:51+08:00">2021-12-25</time>
+              <time title="创建时间：2021-12-25 00:48:51" itemprop="dateCreated datePublished" datetime="2021-12-25T00:48:51+08:00">2021-12-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-03 23:43:35" itemprop="dateModified" datetime="2022-01-03T23:43:35+08:00">2022-01-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -215,14 +221,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
+              <span>1.2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -235,7 +241,7 @@
 
       
         <h2 id="Machine-Learning"><a href="#Machine-Learning" class="headerlink" title="Machine Learning"></a>Machine Learning</h2><p>≈ Looking for Function</p>
-<h4 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h4><p>The function outputs a scalar.</p>
+<h3 id="General-Guidance"><a href="#General-Guidance" class="headerlink" title="General Guidance"></a>General Guidance</h3><h4 id="Regression"><a href="#Regression" class="headerlink" title="Regression"></a>Regression</h4><p>The function outputs a scalar.</p>
 <h4 id="Classification"><a href="#Classification" class="headerlink" title="Classification"></a>Classification</h4><p>Given options(classes),the function outputs the correct one.</p>
 <h4 id="Structured-Learning"><a href="#Structured-Learning" class="headerlink" title="Structured Learning"></a>Structured Learning</h4><p>creat something with structure(image, document)<span id="more"></span></p>
 <h4 id="How-to-find-a-function"><a href="#How-to-find-a-function" class="headerlink" title="How to find a function?"></a>How to find a function?</h4><ol>
@@ -272,8 +278,30 @@
 <p>每次更新一次参数叫做一次Update。</p>
 <p>把所有的batch看过一遍，叫做一个epoch。</p>
 <p>1 epoch = see all the batches once</p>
-<h5 id="Fully-Connect-Feedforward-Network"><a href="#Fully-Connect-Feedforward-Network" class="headerlink" title="Fully Connect Feedforward Network"></a>Fully Connect Feedforward Network</h5><h5 id="Convolutional-Neural-Network-CNN"><a href="#Convolutional-Neural-Network-CNN" class="headerlink" title="Convolutional Neural Network(CNN)"></a>Convolutional Neural Network(CNN)</h5><h4 id="Optimization-Fails-because-……"><a href="#Optimization-Fails-because-……" class="headerlink" title="Optimization Fails because ……"></a>Optimization Fails because ……</h4><p>local minima &amp; saddle point</p>
-<h4 id="Optimization-with-Batch"><a href="#Optimization-with-Batch" class="headerlink" title="Optimization with Batch"></a>Optimization with Batch</h4><h5 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h5><p>1 epoch = see all the batches once ➖&gt; Shuffle after each epoch</p>
+<h5 id="Fully-Connect-Feedforward-Network"><a href="#Fully-Connect-Feedforward-Network" class="headerlink" title="Fully Connect Feedforward Network"></a>Fully Connect Feedforward Network</h5><h5 id="Convolutional-Neural-Network-CNN"><a href="#Convolutional-Neural-Network-CNN" class="headerlink" title="Convolutional Neural Network(CNN)"></a>Convolutional Neural Network(CNN)</h5><h3 id="When-Gradient-Is-Small-Local-Minimum-and-Saddle-Point"><a href="#When-Gradient-Is-Small-Local-Minimum-and-Saddle-Point" class="headerlink" title="When Gradient Is Small: Local Minimum and Saddle Point"></a>When Gradient Is Small: Local Minimum and Saddle Point</h3><h4 id="Optimization-Fails-because-……"><a href="#Optimization-Fails-because-……" class="headerlink" title="Optimization Fails because ……"></a>Optimization Fails because ……</h4><h5 id="critical-point"><a href="#critical-point" class="headerlink" title="critical point"></a>critical point</h5><ul>
+<li>local minima</li>
+<li>saddle point</li>
+</ul>
+<h5 id="which-one"><a href="#which-one" class="headerlink" title="which one?"></a>which one?</h5><p>Taler Series Approximation</p>
+<ul>
+<li><strong>Gradient</strong> <script type="math/tex">g</script> is a <strong>vector</strong></li>
+<li><strong>Hessian</strong> <script type="math/tex">H</script> is a <strong>matrix</strong></li>
+</ul>
+<h5 id="Hessian"><a href="#Hessian" class="headerlink" title="Hessian"></a>Hessian</h5><p>Fall all <script type="math/tex">v</script></p>
+<script type="math/tex; mode=display">v^THv>0$$    ➖  Local minima
+
+= $$H$$ is positive definite = All eigen values are positive.
+
+Fall all $$v</script><p>  <script type="math/tex">v^THv<0</script>   ➖   Local maxima</p>
+<p>= <script type="math/tex">H</script> is negative definite = All eigen values are negative.</p>
+<p>Sometimes <script type="math/tex">v^THv>0</script> ,sometimes <script type="math/tex">v^THv<0</script>    ➖  Saddle point</p>
+<p>= Some eigen values are positive, and some are negative.</p>
+<h5 id="Don’t-afraid-of-saddle-point"><a href="#Don’t-afraid-of-saddle-point" class="headerlink" title="Don’t afraid of saddle point?"></a>Don’t afraid of saddle point?</h5><p><script type="math/tex">H</script> may tell us parameter update direction!</p>
+<p>You can escape the saddle point and decrease the loss.</p>
+<p>(this method is seldom used in practice)</p>
+<h5 id="Saddle-Point-v-s-Local-Minima"><a href="#Saddle-Point-v-s-Local-Minima" class="headerlink" title="Saddle Point v.s. Local Minima"></a>Saddle Point v.s. Local Minima</h5><p>Saddle point in higher dimension?</p>
+<p>When you have lots of parameters, perhaps local minima is rare ?</p>
+<h3 id="Tips-for-training-Batch-and-Momentum"><a href="#Tips-for-training-Batch-and-Momentum" class="headerlink" title="Tips for training:Batch and Momentum"></a>Tips for training:Batch and Momentum</h3><h4 id="Optimization-with-Batch"><a href="#Optimization-with-Batch" class="headerlink" title="Optimization with Batch"></a>Optimization with Batch</h4><h5 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h5><p>1 epoch = see all the batches once ➖&gt; Shuffle after each epoch</p>
 <p>第一个epoch分一次batch</p>
 <p>第二个epoch会重新再分一次batch</p>
 <p>所以哪些资料在同一个batch里面，每一个epoch都不一样，这件事情叫做 Shuffle。</p>
@@ -309,8 +337,33 @@
 <li><p>Smaller batch size and momentum help escape critical points.</p>
 </li>
 </ul>
+<h3 id="Tips-for-training-Adaptive-Learning-Rate"><a href="#Tips-for-training-Adaptive-Learning-Rate" class="headerlink" title="Tips for training:Adaptive Learning  Rate"></a>Tips for training:Adaptive Learning  Rate</h3><p>Training can be difficult even without critical points.</p>
+<p>Learning rate <strong>cannot</strong> be <strong>one-size-fits-all</strong></p>
+<p>Different parameters needs different learning rate</p>
+<h4 id="Root-Mean-Square"><a href="#Root-Mean-Square" class="headerlink" title="Root Mean Square"></a>Root Mean Square</h4><p>Used in <strong>Adagrad</strong></p>
+<h4 id="Learning-rate-adapts-dynamically"><a href="#Learning-rate-adapts-dynamically" class="headerlink" title="Learning rate adapts dynamically"></a>Learning rate adapts dynamically</h4><h5 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h5><h5 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h5><p><strong>Adam</strong>: RMSProp + Momentum</p>
+<p>Original paper:<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></p>
 <h4 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h4><h5 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h5><p>As the training goes, we are closer to the destination,so we reduce the learning rate.</p>
 <h5 id="Warm-Up"><a href="#Warm-Up" class="headerlink" title="Warm Up"></a>Warm Up</h5><p>Increase and then decrease ?</p>
+<ul>
+<li><p>Residual Network</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a></p>
+</li>
+<li><p>Transformer</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+</li>
+</ul>
+<p>Please refer to <strong>RAdam</strong>     <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1908.03265">https://arxiv.org/abs/1908.03265</a></p>
+<h4 id="Summary-of-Optimization"><a href="#Summary-of-Optimization" class="headerlink" title="Summary of Optimization"></a>Summary of Optimization</h4><h5 id="Vanilla-Gradient-Descent"><a href="#Vanilla-Gradient-Descent" class="headerlink" title="(Vanilla)Gradient Descent"></a>(Vanilla)Gradient Descent</h5><h5 id="Various-Improvements"><a href="#Various-Improvements" class="headerlink" title="Various Improvements"></a>Various Improvements</h5><ul>
+<li>Momentum:weighted sum of the previous gradients <strong>(Consider direction)</strong></li>
+<li>root mean square of the gradients <strong>(only magnitude)</strong></li>
+<li>Learning rate scheduling</li>
+</ul>
+<h3 id="Loss-Function-Classification"><a href="#Loss-Function-Classification" class="headerlink" title="Loss Function: Classification"></a>Loss Function: Classification</h3><h4 id="Classification-as-Regression"><a href="#Classification-as-Regression" class="headerlink" title="Classification as Regression ?"></a>Classification as Regression ?</h4><ul>
+<li>Regression</li>
+<li>Classification as regression ?</li>
+</ul>
+<p>Class as one-hot vector</p>
 
     </div>
 
@@ -413,7 +466,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Regression"><span class="nav-number">1.0.1.</span> <span class="nav-text">Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification"><span class="nav-number">1.0.2.</span> <span class="nav-text">Classification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structured-Learning"><span class="nav-number">1.0.3.</span> <span class="nav-text">Structured Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-find-a-function"><span class="nav-number">1.0.4.</span> <span class="nav-text">How to find a function?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Backpropagation"><span class="nav-number">1.0.4.1.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">1.0.4.2.</span> <span class="nav-text">Hyper parameters</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-models"><span class="nav-number">1.0.4.3.</span> <span class="nav-text">Linear models</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activation-function"><span class="nav-number">1.0.4.4.</span> <span class="nav-text">Activation function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Update-amp-Epoch"><span class="nav-number">1.0.4.5.</span> <span class="nav-text">Update &amp; Epoch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Fully-Connect-Feedforward-Network"><span class="nav-number">1.0.4.6.</span> <span class="nav-text">Fully Connect Feedforward Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Convolutional-Neural-Network-CNN"><span class="nav-number">1.0.4.7.</span> <span class="nav-text">Convolutional Neural Network(CNN)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-Fails-because-%E2%80%A6%E2%80%A6"><span class="nav-number">1.0.5.</span> <span class="nav-text">Optimization Fails because ……</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-with-Batch"><span class="nav-number">1.0.6.</span> <span class="nav-text">Optimization with Batch</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Shuffle"><span class="nav-number">1.0.6.1.</span> <span class="nav-text">Shuffle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Small-Batch-v-s-Large-Batch"><span class="nav-number">1.0.6.2.</span> <span class="nav-text">Small Batch v.s. Large Batch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Have-both-fish-and-bear%E2%80%99s-paws"><span class="nav-number">1.0.6.3.</span> <span class="nav-text">Have both fish and bear’s paws?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Momentum"><span class="nav-number">1.0.7.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concluding-Remarks"><span class="nav-number">1.0.8.</span> <span class="nav-text">Concluding Remarks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-Rate-Scheduling"><span class="nav-number">1.0.9.</span> <span class="nav-text">Learning Rate Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Learning-Rate-Decay"><span class="nav-number">1.0.9.1.</span> <span class="nav-text">Learning Rate Decay</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Warm-Up"><span class="nav-number">1.0.9.2.</span> <span class="nav-text">Warm Up</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Guidance"><span class="nav-number">1.1.</span> <span class="nav-text">General Guidance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Regression"><span class="nav-number">1.1.1.</span> <span class="nav-text">Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification"><span class="nav-number">1.1.2.</span> <span class="nav-text">Classification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structured-Learning"><span class="nav-number">1.1.3.</span> <span class="nav-text">Structured Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-find-a-function"><span class="nav-number">1.1.4.</span> <span class="nav-text">How to find a function?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Backpropagation"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Hyper parameters</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-models"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Linear models</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activation-function"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Activation function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Update-amp-Epoch"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">Update &amp; Epoch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Fully-Connect-Feedforward-Network"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">Fully Connect Feedforward Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Convolutional-Neural-Network-CNN"><span class="nav-number">1.1.4.7.</span> <span class="nav-text">Convolutional Neural Network(CNN)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#When-Gradient-Is-Small-Local-Minimum-and-Saddle-Point"><span class="nav-number">1.2.</span> <span class="nav-text">When Gradient Is Small: Local Minimum and Saddle Point</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-Fails-because-%E2%80%A6%E2%80%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text">Optimization Fails because ……</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#critical-point"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">critical point</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#which-one"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">which one?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hessian"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Hessian</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Don%E2%80%99t-afraid-of-saddle-point"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Don’t afraid of saddle point?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Saddle-Point-v-s-Local-Minima"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">Saddle Point v.s. Local Minima</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-for-training-Batch-and-Momentum"><span class="nav-number">1.3.</span> <span class="nav-text">Tips for training:Batch and Momentum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-with-Batch"><span class="nav-number">1.3.1.</span> <span class="nav-text">Optimization with Batch</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Shuffle"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Shuffle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Small-Batch-v-s-Large-Batch"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Small Batch v.s. Large Batch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Have-both-fish-and-bear%E2%80%99s-paws"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">Have both fish and bear’s paws?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Momentum"><span class="nav-number">1.3.2.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concluding-Remarks"><span class="nav-number">1.3.3.</span> <span class="nav-text">Concluding Remarks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-for-training-Adaptive-Learning-Rate"><span class="nav-number">1.4.</span> <span class="nav-text">Tips for training:Adaptive Learning  Rate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Root-Mean-Square"><span class="nav-number">1.4.1.</span> <span class="nav-text">Root Mean Square</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-rate-adapts-dynamically"><span class="nav-number">1.4.2.</span> <span class="nav-text">Learning rate adapts dynamically</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RMSProp"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Adam"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-Rate-Scheduling"><span class="nav-number">1.4.3.</span> <span class="nav-text">Learning Rate Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Learning-Rate-Decay"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">Learning Rate Decay</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Warm-Up"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">Warm Up</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-of-Optimization"><span class="nav-number">1.4.4.</span> <span class="nav-text">Summary of Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Vanilla-Gradient-Descent"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">(Vanilla)Gradient Descent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Various-Improvements"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">Various Improvements</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Function-Classification"><span class="nav-number">1.5.</span> <span class="nav-text">Loss Function: Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification-as-Regression"><span class="nav-number">1.5.1.</span> <span class="nav-text">Classification as Regression ?</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -489,12 +542,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">9k</span>
+    <span title="站点总字数">7k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">8 分钟</span>
+    <span title="站点阅读时长">7 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
@@ -552,6 +605,59 @@
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
