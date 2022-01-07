@@ -28,7 +28,7 @@
 <meta property="og:description" content="Machine Learning≈ Looking for Function General GuidanceRegressionThe function outputs a scalar. ClassificationGiven options(classes),the function outputs the correct one. Structured Learningcreat some">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-12-24T16:48:51.000Z">
-<meta property="article:modified_time" content="2022-01-06T12:36:41.165Z">
+<meta property="article:modified_time" content="2022-01-07T15:40:57.829Z">
 <meta property="article:author" content="朱睿智">
 <meta property="article:tag" content="机器学习">
 <meta name="twitter:card" content="summary">
@@ -196,7 +196,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-01-06 20:36:41" itemprop="dateModified" datetime="2022-01-06T20:36:41+08:00">2022-01-06</time>
+                <time title="修改时间：2022-01-07 23:40:57" itemprop="dateModified" datetime="2022-01-07T23:40:57+08:00">2022-01-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,14 +221,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.2k</span>
+              <span>8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -288,161 +288,371 @@
 <li><strong>Hessian</strong> <script type="math/tex">H</script> is a <strong>matrix</strong></li>
 </ul>
 <h5 id="Hessian"><a href="#Hessian" class="headerlink" title="Hessian"></a>Hessian</h5><p>Fall all <script type="math/tex">v</script> :</p>
-<p>  <script type="math/tex">v^THv>0</script>    ➖  Local minima</p>
-<p>= <script type="math/tex">H</script> is positive definite = All eigen values are positive.</p>
-<p>Fall all <script type="math/tex">v</script> :</p>
-<p>  <script type="math/tex">v^THv<0</script>   ➖   Local maxima</p>
-<p>= <script type="math/tex">H</script> is negative definite = All eigen values are negative.</p>
-<p>Sometimes <script type="math/tex">v^THv>0</script> ,sometimes <script type="math/tex">v^THv<0</script>    ➖  Saddle point</p>
-<p>= Some eigen values are positive, and some are negative.</p>
-<h5 id="Don’t-afraid-of-saddle-point"><a href="#Don’t-afraid-of-saddle-point" class="headerlink" title="Don’t afraid of saddle point?"></a>Don’t afraid of saddle point?</h5><p><script type="math/tex">H</script> may tell us parameter update direction!</p>
-<p>You can escape the saddle point and decrease the loss.</p>
-<p>(this method is seldom used in practice)</p>
-<h5 id="Saddle-Point-v-s-Local-Minima"><a href="#Saddle-Point-v-s-Local-Minima" class="headerlink" title="Saddle Point v.s. Local Minima"></a>Saddle Point v.s. Local Minima</h5><p>Saddle point in higher dimension?</p>
-<p>When you have lots of parameters, perhaps local minima is rare ?</p>
-<h3 id="Tips-for-training-Batch-and-Momentum"><a href="#Tips-for-training-Batch-and-Momentum" class="headerlink" title="Tips for training:Batch and Momentum"></a>Tips for training:Batch and Momentum</h3><h4 id="Optimization-with-Batch"><a href="#Optimization-with-Batch" class="headerlink" title="Optimization with Batch"></a>Optimization with Batch</h4><h5 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h5><p>1 epoch = see all the batches once ➖&gt; Shuffle after each epoch</p>
-<p>第一个epoch分一次batch</p>
-<p>第二个epoch会重新再分一次batch</p>
-<p>所以哪些资料在同一个batch里面，每一个epoch都不一样，这件事情叫做 Shuffle。</p>
-<h5 id="Small-Batch-v-s-Large-Batch"><a href="#Small-Batch-v-s-Large-Batch" class="headerlink" title="Small Batch v.s. Large Batch"></a>Small Batch v.s. Large Batch</h5><ul>
-<li>Larger batch size does <strong>not</strong> require longer time to compute gradient(unless batch size is too large)</li>
-<li>Smaller batch size requires longer time for one epoch(longer time for seeing all data once)</li>
-<li>Smaller batch size has better performance</li>
-<li>“Noisy” update is better for training</li>
-<li>Smaller batch is better on testing data?</li>
+<script type="math/tex; mode=display">v^THv>0$$    ➖  Local minima
+
+= $$H$$ is positive definite = All eigen values are positive.
+
+Fall all $$v$$ :
+
+  $$v^THv<0$$   ➖   Local maxima
+
+= $$H$$ is negative definite = All eigen values are negative.
+
+Sometimes $$v^THv>0$$ ,sometimes $$v^THv<0$$    ➖  Saddle point
+
+= Some eigen values are positive, and some are negative.
+
+##### Don’t afraid of saddle point?
+
+$$H$$ may tell us parameter update direction!
+
+You can escape the saddle point and decrease the loss.
+
+(this method is seldom used in practice)
+
+##### Saddle Point v.s. Local Minima
+
+Saddle point in higher dimension?
+
+When you have lots of parameters, perhaps local minima is rare ?
+
+### Tips for training:Batch and Momentum
+
+#### Optimization with Batch
+
+##### Shuffle
+
+1 epoch = see all the batches once ➖> Shuffle after each epoch
+
+第一个epoch分一次batch
+
+第二个epoch会重新再分一次batch
+
+所以哪些资料在同一个batch里面，每一个epoch都不一样，这件事情叫做 Shuffle。
+
+##### Small Batch v.s. Large Batch
+
+- Larger batch size does **not** require longer time to compute gradient(unless batch size is too large)
+- Smaller batch size requires longer time for one epoch(longer time for seeing all data once)
+- Smaller batch size has better performance
+- “Noisy” update is better for training
+- Smaller batch is better on testing data?
+
+Batch size is a hyperparameter you have to decide.
+
+##### Have both fish and bear’s paws?
+
+- Large Batch Optimization for Deep Learning: Training BERT in 76 minutes (https://arxiv.org/abs/1904.00962)
+- Extremely Large Minibatch SGD: Training ResNet-50 on ImageNet in 15 Minutes (https://arxiv.org/abs/1711.04325)
+- Stochastic Weight Averaging in Parallel: Large- Batch Training That Generalizes Well (https://arxiv.org/abs/2001.02312)
+- Large Batch Training of Convolutional Networks (https://arxiv.org/abs/1708.03888)
+- Accurate, large minibatch sgd: Traiaing imagenet in 1 hour (https://arxiv.org/abs/1706.02677)
+
+#### Momentum
+
+(Vanilla)Gradient Descent
+
+Gradient Descent + Momentum
+
+- Movement: **movement of last step** minus **gradient** at present
+
+#### Concluding Remarks
+
+- Critical points have zero gradients.
+- Critical points can be either saddle points or local minima. 
+  - Can be determined by the Hessian matrix.
+  - It is possible to escape saddle points along the direction of eigenvectors of the Hessian matrix.
+  - Local minima may be rare.
+
+- Smaller batch size and momentum help escape critical points.
+
+### Tips for training:Adaptive Learning  Rate
+
+Training can be difficult even without critical points.
+
+Learning rate **cannot** be **one-size-fits-all**
+
+Different parameters needs different learning rate
+
+#### Root Mean Square
+
+Used in **Adagrad**
+
+#### Learning rate adapts dynamically
+
+##### RMSProp
+
+##### Adam
+
+**Adam**: RMSProp + Momentum
+
+Original paper:https://arxiv.org/pdf/1412.6980.pdf
+
+#### Learning Rate Scheduling
+
+##### Learning Rate Decay
+
+As the training goes, we are closer to the destination,so we reduce the learning rate.
+
+##### Warm Up
+
+Increase and then decrease ?
+
+- Residual Network
+
+  https://arxiv.org/abs/1512.03385
+
+- Transformer
+
+  https://arxiv.org/abs/1706.03762
+
+Please refer to **RAdam**     https://arxiv.org/abs/1908.03265
+
+#### Summary of Optimization
+
+##### (Vanilla)Gradient Descent
+
+##### Various Improvements
+
+- Momentum:weighted sum of the previous gradients **(Consider direction)**
+- root mean square of the gradients **(only magnitude)**
+- Learning rate scheduling
+
+### Loss Function: Classification
+
+#### Classification as Regression ?
+
+- Regression
+- Classification as regression ?
+
+Class as one-hot vector
+
+##### Class as one-hot vector
+
+##### Regression
+
+##### Classification
+
+##### Softmax
+
+#### Loss of Classification
+
+##### Mean Square Error(MSE)
+
+##### Cross-entropy
+
+Minimizing cross-entropy is equivalent to maximizing likelihood.  **WIN**
+
+### Quick Introduction of Bath Normalization
+
+#### Changing Landscape
+
+#### Feature Normalization
+
+##### Considering Deep Learning
+
+Consider a batch
+
+Batch Normalization
+
+适用于bath size较大的时候
+
+##### Batch normalization
+
+Original paper:https://arxiv.org/abs/1502.03167
+
+##### Batch normalization-Testing
+
+We do not always have batch at testing stage.
+
+Computing the moving average of the two of the batches during training.
+
+##### Internal Covariate Shift ?
+
+How Dose Batch Normalization Help Optimization ?
+
+https://arxiv.org/abs/1805.11604
+
+Experimental results (and theoretically analysis) support batch normalization change the landscape of error surface.
+
+#### To learn more…
+
+- Batch Renormalization
+  - https://arxiv.org/abs/1702.03275
+- Layer Normalization
+  - https://arxiv.org/abs/1607.06450
+- Instance Normalization
+  - https://arxiv.org/abs/1607.08022
+- Group Normalization
+  - https://arxiv.org/abs/1803.08494
+- Weight Normalization 
+  - https://arxiv.org/abs/1602.07868
+- Spectrum Normalization
+  - https://arxiv.org/abs/1705.10941
+
+### Convolutional Neural Network(CNN)
+
+Network Architecture designed for Image
+
+#### Image Classification 
+
+Do we really need “fully connected” in image processing ?
+
+##### Observation 1
+
+Identifying some critical patterns
+
+Some patterns are much smaller than the whole image.
+
+A neuron does not have to see the whole image.
+
+##### Simplification 1
+
+Receptive field      Can be overlapped
+
+- Can different neurons have different sizes of receptive field ?
+- Cover only some channels ?
+- Not square  receptive field ?
+
+##### Simplification 1 - Typical Setting
+
+all channels
+
+kernel size  (e.g.,3x3)
+
+Each receptive field has a set of neurons (e.g.,64 neurons).
+
+stride    a hyper parameter
+
+overlap    padding
+
+The receptive fields cover the whole image.
+
+##### Observation 2
+
+- The same patterns appear in different regions.
+
+##### Simplification 2
+
+parameter sharing
+
+Two neurons with the same receptive  field would not share parameters.
+
+##### Simplification 2 - Typical Setting
+
+Each receptive field has a set of neurons (e.g.,64 neurons).
+
+Each receptive field has the neurons with the same set of parameters.
+
+##### Benefit of Convolutional Layer
+
+Larger model bias (for image)
+
+##### Convolutional Layer
+
+Another story based on **filter**
+
+##### Comparison of Two Stories
+
+The neurons with different receptive  fields  **share the parameters**.
+
+**Each filter convolves over the input image.**
+
+##### Observation 3
+
+- Subsampling the pixels will not change the object
+
+##### Pooling - Max Pooling
+
+##### The whole CNN
+
+Image —Convolution—Pooling—Convolution—Pooling—Flatten—Fully Connected Layers—softmax—output
+
+#### Application:Playing Go
+
+##### Why CNN for Go playing ?
+
+#### More Applications
+
+##### Speech
+
+https://dl.acm.org/doi/10.1109/TASLP.2014.2339736
+
+##### Natural Language Processing
+
+https://www.aclweb.org/anthology/S15-2079/
+
+#### To learn more…
+
+- CNN is not invariant to scaling and rotation (we need data augmentation).
+
+Spatial Transformer Layer    https://youtu.be/SoCywZ1hZak (in Mandarin)
+
+### Self-attention
+
+#### Sophisticated Input
+
+- Input is **a vector**
+- Input is **a set of vectors**
+
+#### Vector Set as Input
+
+One-hot Encoding
+
+Word Embedding
+
+- Graph is also a set of vectors (consider each **node** as **a vector**)
+
+#### What is the output ?
+
+- Each vector has a label.(Sequence Labeling)
+- The whole sequence has a label.
+- Model decides the number of labels itself.
+
+#### self-attention
+
+Attention is all you need.    https://arxiv.org/abs/1706.03762
+
+- Dot-product
+
+- Additive
+
+query   key   attention score
+
+##### Multi-head Self-attention
+
+Different types of relevance
+
+##### Positional Encoding
+
+- No position information in self-attention.
+- Each position has a unique positional vector $$e^i</script><ul>
+<li><strong>hand-crafted</strong></li>
+<li><strong>learned from data</strong></li>
 </ul>
-<p>Batch size is a hyperparameter you have to decide.</p>
-<h5 id="Have-both-fish-and-bear’s-paws"><a href="#Have-both-fish-and-bear’s-paws" class="headerlink" title="Have both fish and bear’s paws?"></a>Have both fish and bear’s paws?</h5><ul>
-<li>Large Batch Optimization for Deep Learning: Training BERT in 76 minutes (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1904.00962">https://arxiv.org/abs/1904.00962</a>)</li>
-<li>Extremely Large Minibatch SGD: Training ResNet-50 on ImageNet in 15 Minutes (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1711.04325">https://arxiv.org/abs/1711.04325</a>)</li>
-<li>Stochastic Weight Averaging in Parallel: Large- Batch Training That Generalizes Well (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2001.02312">https://arxiv.org/abs/2001.02312</a>)</li>
-<li>Large Batch Training of Convolutional Networks (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1708.03888">https://arxiv.org/abs/1708.03888</a>)</li>
-<li>Accurate, large minibatch sgd: Traiaing imagenet in 1 hour (<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.02677">https://arxiv.org/abs/1706.02677</a>)</li>
-</ul>
-<h4 id="Momentum"><a href="#Momentum" class="headerlink" title="Momentum"></a>Momentum</h4><p>(Vanilla)Gradient Descent</p>
-<p>Gradient Descent + Momentum</p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2003.09229">https://arxiv.org/abs/2003.09229</a></p>
+<h4 id="Many-applications-…"><a href="#Many-applications-…" class="headerlink" title="Many applications …"></a>Many applications …</h4><p>Transformer  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
+<p>BERT  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1810.04805">https://arxiv.org/abs/1810.04805</a></p>
+<p>Widely used in Natural Langue Processing (NLP) !</p>
+<h5 id="Self-attention-for-Speech"><a href="#Self-attention-for-Speech" class="headerlink" title="Self-attention for Speech"></a>Self-attention for Speech</h5><p>Truncated Self-attention</p>
+<h5 id="Self-attention-for-Image"><a href="#Self-attention-for-Image" class="headerlink" title="Self-attention for Image"></a>Self-attention for Image</h5><p>Self-Attention GAN  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1805.08318">https://arxiv.org/abs/1805.08318</a></p>
+<p>Detection Transformer (DETR)  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2005.12872">https://arxiv.org/abs/2005.12872</a></p>
+<h5 id="Self-attention-for-Graph"><a href="#Self-attention-for-Graph" class="headerlink" title="Self-attention for Graph"></a>Self-attention for Graph</h5><p>Consider <strong>edge</strong>:only attention to connected nodes</p>
+<p>This is one type of <strong>Graph Neural Network (GNN).</strong></p>
+<h4 id="Self-attention-v-s-CNN"><a href="#Self-attention-v-s-CNN" class="headerlink" title="Self-attention v.s. CNN"></a>Self-attention v.s. CNN</h4><p>CNN:self-attention that can only attends in a receptive field</p>
 <ul>
-<li>Movement: <strong>movement of last step</strong> minus <strong>gradient</strong> at present</li>
+<li>CNN is simplified self-attention.</li>
 </ul>
-<h4 id="Concluding-Remarks"><a href="#Concluding-Remarks" class="headerlink" title="Concluding Remarks"></a>Concluding Remarks</h4><ul>
-<li>Critical points have zero gradients.</li>
-<li><p>Critical points can be either saddle points or local minima. </p>
+<p>Self-attention:CNN with learnable receptive field</p>
 <ul>
-<li>Can be determined by the Hessian matrix.</li>
-<li>It is possible to escape saddle points along the direction of eigenvectors of the Hessian matrix.</li>
-<li>Local minima may be rare.</li>
+<li>Self-attention is the complex version of CNN.</li>
 </ul>
-</li>
-<li><p>Smaller batch size and momentum help escape critical points.</p>
-</li>
-</ul>
-<h3 id="Tips-for-training-Adaptive-Learning-Rate"><a href="#Tips-for-training-Adaptive-Learning-Rate" class="headerlink" title="Tips for training:Adaptive Learning  Rate"></a>Tips for training:Adaptive Learning  Rate</h3><p>Training can be difficult even without critical points.</p>
-<p>Learning rate <strong>cannot</strong> be <strong>one-size-fits-all</strong></p>
-<p>Different parameters needs different learning rate</p>
-<h4 id="Root-Mean-Square"><a href="#Root-Mean-Square" class="headerlink" title="Root Mean Square"></a>Root Mean Square</h4><p>Used in <strong>Adagrad</strong></p>
-<h4 id="Learning-rate-adapts-dynamically"><a href="#Learning-rate-adapts-dynamically" class="headerlink" title="Learning rate adapts dynamically"></a>Learning rate adapts dynamically</h4><h5 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h5><h5 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h5><p><strong>Adam</strong>: RMSProp + Momentum</p>
-<p>Original paper:<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1412.6980.pdf">https://arxiv.org/pdf/1412.6980.pdf</a></p>
-<h4 id="Learning-Rate-Scheduling"><a href="#Learning-Rate-Scheduling" class="headerlink" title="Learning Rate Scheduling"></a>Learning Rate Scheduling</h4><h5 id="Learning-Rate-Decay"><a href="#Learning-Rate-Decay" class="headerlink" title="Learning Rate Decay"></a>Learning Rate Decay</h5><p>As the training goes, we are closer to the destination,so we reduce the learning rate.</p>
-<h5 id="Warm-Up"><a href="#Warm-Up" class="headerlink" title="Warm Up"></a>Warm Up</h5><p>Increase and then decrease ?</p>
-<ul>
-<li><p>Residual Network</p>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1512.03385">https://arxiv.org/abs/1512.03385</a></p>
-</li>
-<li><p>Transformer</p>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1706.03762">https://arxiv.org/abs/1706.03762</a></p>
-</li>
-</ul>
-<p>Please refer to <strong>RAdam</strong>     <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1908.03265">https://arxiv.org/abs/1908.03265</a></p>
-<h4 id="Summary-of-Optimization"><a href="#Summary-of-Optimization" class="headerlink" title="Summary of Optimization"></a>Summary of Optimization</h4><h5 id="Vanilla-Gradient-Descent"><a href="#Vanilla-Gradient-Descent" class="headerlink" title="(Vanilla)Gradient Descent"></a>(Vanilla)Gradient Descent</h5><h5 id="Various-Improvements"><a href="#Various-Improvements" class="headerlink" title="Various Improvements"></a>Various Improvements</h5><ul>
-<li>Momentum:weighted sum of the previous gradients <strong>(Consider direction)</strong></li>
-<li>root mean square of the gradients <strong>(only magnitude)</strong></li>
-<li>Learning rate scheduling</li>
-</ul>
-<h3 id="Loss-Function-Classification"><a href="#Loss-Function-Classification" class="headerlink" title="Loss Function: Classification"></a>Loss Function: Classification</h3><h4 id="Classification-as-Regression"><a href="#Classification-as-Regression" class="headerlink" title="Classification as Regression ?"></a>Classification as Regression ?</h4><ul>
-<li>Regression</li>
-<li>Classification as regression ?</li>
-</ul>
-<p>Class as one-hot vector</p>
-<h5 id="Class-as-one-hot-vector"><a href="#Class-as-one-hot-vector" class="headerlink" title="Class as one-hot vector"></a>Class as one-hot vector</h5><h5 id="Regression-1"><a href="#Regression-1" class="headerlink" title="Regression"></a>Regression</h5><h5 id="Classification-1"><a href="#Classification-1" class="headerlink" title="Classification"></a>Classification</h5><h5 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h5><h4 id="Loss-of-Classification"><a href="#Loss-of-Classification" class="headerlink" title="Loss of Classification"></a>Loss of Classification</h4><h5 id="Mean-Square-Error-MSE"><a href="#Mean-Square-Error-MSE" class="headerlink" title="Mean Square Error(MSE)"></a>Mean Square Error(MSE)</h5><h5 id="Cross-entropy"><a href="#Cross-entropy" class="headerlink" title="Cross-entropy"></a>Cross-entropy</h5><p>Minimizing cross-entropy is equivalent to maximizing likelihood.  <strong>WIN</strong></p>
-<h3 id="Quick-Introduction-of-Bath-Normalization"><a href="#Quick-Introduction-of-Bath-Normalization" class="headerlink" title="Quick Introduction of Bath Normalization"></a>Quick Introduction of Bath Normalization</h3><h4 id="Changing-Landscape"><a href="#Changing-Landscape" class="headerlink" title="Changing Landscape"></a>Changing Landscape</h4><h4 id="Feature-Normalization"><a href="#Feature-Normalization" class="headerlink" title="Feature Normalization"></a>Feature Normalization</h4><h5 id="Considering-Deep-Learning"><a href="#Considering-Deep-Learning" class="headerlink" title="Considering Deep Learning"></a>Considering Deep Learning</h5><p>Consider a batch</p>
-<p>Batch Normalization</p>
-<p>适用于bath size较大的时候</p>
-<h5 id="Batch-normalization"><a href="#Batch-normalization" class="headerlink" title="Batch normalization"></a>Batch normalization</h5><p>Original paper:<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1502.03167">https://arxiv.org/abs/1502.03167</a></p>
-<h5 id="Batch-normalization-Testing"><a href="#Batch-normalization-Testing" class="headerlink" title="Batch normalization-Testing"></a>Batch normalization-Testing</h5><p>We do not always have batch at testing stage.</p>
-<p>Computing the moving average of the two of the batches during training.</p>
-<h5 id="Internal-Covariate-Shift"><a href="#Internal-Covariate-Shift" class="headerlink" title="Internal Covariate Shift ?"></a>Internal Covariate Shift ?</h5><p>How Dose Batch Normalization Help Optimization ?</p>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1805.11604">https://arxiv.org/abs/1805.11604</a></p>
-<p>Experimental results (and theoretically analysis) support batch normalization change the landscape of error surface.</p>
-<h4 id="To-learn-more…"><a href="#To-learn-more…" class="headerlink" title="To learn more…"></a>To learn more…</h4><ul>
-<li>Batch Renormalization<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1702.03275">https://arxiv.org/abs/1702.03275</a></li>
-</ul>
-</li>
-<li>Layer Normalization<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1607.06450">https://arxiv.org/abs/1607.06450</a></li>
-</ul>
-</li>
-<li>Instance Normalization<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1607.08022">https://arxiv.org/abs/1607.08022</a></li>
-</ul>
-</li>
-<li>Group Normalization<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1803.08494">https://arxiv.org/abs/1803.08494</a></li>
-</ul>
-</li>
-<li>Weight Normalization <ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1602.07868">https://arxiv.org/abs/1602.07868</a></li>
-</ul>
-</li>
-<li>Spectrum Normalization<ul>
-<li><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1705.10941">https://arxiv.org/abs/1705.10941</a></li>
-</ul>
-</li>
-</ul>
-<h3 id="Convolutional-Neural-Network-CNN-1"><a href="#Convolutional-Neural-Network-CNN-1" class="headerlink" title="Convolutional Neural Network(CNN)"></a>Convolutional Neural Network(CNN)</h3><p>Network Architecture designed for Image</p>
-<h4 id="Image-Classification"><a href="#Image-Classification" class="headerlink" title="Image Classification"></a>Image Classification</h4><p>Do we really need “fully connected” in image processing ?</p>
-<h5 id="Observation-1"><a href="#Observation-1" class="headerlink" title="Observation 1"></a>Observation 1</h5><p>Identifying some critical patterns</p>
-<p>Some patterns are much smaller than the whole image.</p>
-<p>A neuron does not have to see the whole image.</p>
-<h5 id="Simplification-1"><a href="#Simplification-1" class="headerlink" title="Simplification 1"></a>Simplification 1</h5><p>Receptive field      Can be overlapped</p>
-<ul>
-<li>Can different neurons have different sizes of receptive field ?</li>
-<li>Cover only some channels ?</li>
-<li>Not square  receptive field ?</li>
-</ul>
-<h5 id="Simplification-1-Typical-Setting"><a href="#Simplification-1-Typical-Setting" class="headerlink" title="Simplification 1 - Typical Setting"></a>Simplification 1 - Typical Setting</h5><p>all channels</p>
-<p>kernel size  (e.g.,3x3)</p>
-<p>Each receptive field has a set of neurons (e.g.,64 neurons).</p>
-<p>stride    a hyper parameter</p>
-<p>overlap    padding</p>
-<p>The receptive fields cover the whole image.</p>
-<h5 id="Observation-2"><a href="#Observation-2" class="headerlink" title="Observation 2"></a>Observation 2</h5><ul>
-<li>The same patterns appear in different regions.</li>
-</ul>
-<h5 id="Simplification-2"><a href="#Simplification-2" class="headerlink" title="Simplification 2"></a>Simplification 2</h5><p>parameter sharing</p>
-<p>Two neurons with the same receptive  field would not share parameters.</p>
-<h5 id="Simplification-2-Typical-Setting"><a href="#Simplification-2-Typical-Setting" class="headerlink" title="Simplification 2 - Typical Setting"></a>Simplification 2 - Typical Setting</h5><p>Each receptive field has a set of neurons (e.g.,64 neurons).</p>
-<p>Each receptive field has the neurons with the same set of parameters.</p>
-<h5 id="Benefit-of-Convolutional-Layer"><a href="#Benefit-of-Convolutional-Layer" class="headerlink" title="Benefit of Convolutional Layer"></a>Benefit of Convolutional Layer</h5><p>Larger model bias (for image)</p>
-<h5 id="Convolutional-Layer"><a href="#Convolutional-Layer" class="headerlink" title="Convolutional Layer"></a>Convolutional Layer</h5><p>Another story based on <strong>filter</strong></p>
-<h5 id="Comparison-of-Two-Stories"><a href="#Comparison-of-Two-Stories" class="headerlink" title="Comparison of Two Stories"></a>Comparison of Two Stories</h5><p>The neurons with different receptive  fields  <strong>share the parameters</strong>.</p>
-<p><strong>Each filter convolves over the input image.</strong></p>
-<h5 id="Observation-3"><a href="#Observation-3" class="headerlink" title="Observation 3"></a>Observation 3</h5><ul>
-<li>Subsampling the pixels will not change the object</li>
-</ul>
-<h5 id="Pooling-Max-Pooling"><a href="#Pooling-Max-Pooling" class="headerlink" title="Pooling - Max Pooling"></a>Pooling - Max Pooling</h5><h5 id="The-whole-CNN"><a href="#The-whole-CNN" class="headerlink" title="The whole CNN"></a>The whole CNN</h5><p>Image —Convolution—Pooling—Convolution—Pooling—Flatten—Fully Connected Layers—softmax—output</p>
-<h4 id="Application-Playing-Go"><a href="#Application-Playing-Go" class="headerlink" title="Application:Playing Go"></a>Application:Playing Go</h4><h5 id="Why-CNN-for-Go-playing"><a href="#Why-CNN-for-Go-playing" class="headerlink" title="Why CNN for Go playing ?"></a>Why CNN for Go playing ?</h5><h4 id="More-Applications"><a href="#More-Applications" class="headerlink" title="More Applications"></a>More Applications</h4><h5 id="Speech"><a href="#Speech" class="headerlink" title="Speech"></a>Speech</h5><p><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1109/TASLP.2014.2339736">https://dl.acm.org/doi/10.1109/TASLP.2014.2339736</a></p>
-<h5 id="Natural-Language-Processing"><a href="#Natural-Language-Processing" class="headerlink" title="Natural Language Processing"></a>Natural Language Processing</h5><p><a target="_blank" rel="noopener" href="https://www.aclweb.org/anthology/S15-2079/">https://www.aclweb.org/anthology/S15-2079/</a></p>
-<h4 id="To-learn-more…-1"><a href="#To-learn-more…-1" class="headerlink" title="To learn more…"></a>To learn more…</h4><ul>
-<li>CNN is not invariant to scaling and rotation (we need data augmentation).</li>
-</ul>
-<p>Spatial Transformer Layer    <a target="_blank" rel="noopener" href="https://youtu.be/SoCywZ1hZak">https://youtu.be/SoCywZ1hZak</a> (in Mandarin)</p>
-<h3 id="Self-attention"><a href="#Self-attention" class="headerlink" title="Self-attention"></a>Self-attention</h3><h4 id="Sophisticated-Input"><a href="#Sophisticated-Input" class="headerlink" title="Sophisticated Input"></a>Sophisticated Input</h4><ul>
-<li>Input is <strong>a vector</strong></li>
-<li>Input is <strong>a set of vectors</strong></li>
-</ul>
-<h4 id="Vector-Set-as-Input"><a href="#Vector-Set-as-Input" class="headerlink" title="Vector Set as Input"></a>Vector Set as Input</h4><p>One-hot Encoding</p>
-<p>Word Embedding</p>
+<p>On the Relationship between Self-Attention and Convolutional Layers  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1911.03584">https://arxiv.org/abs/1911.03584</a></p>
+<p>An Image is Worth 16x16 Words:Transformers for Image Recognition at Scale  <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/2010.11929.pdf">https://arxiv.org/pdf/2010.11929.pdf</a></p>
+<h4 id="Self-attention-v-s-RNN"><a href="#Self-attention-v-s-RNN" class="headerlink" title="Self-attention v.s. RNN"></a>Self-attention v.s. RNN</h4><p>Recurrent Neural Network (RNN)</p>
+<p>Transformers are RNNs:Fast Autoregressive Transformers with Linear Attention  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2006.16236">https://arxiv.org/abs/2006.16236</a></p>
+<h4 id="To-Learn-More-…"><a href="#To-Learn-More-…" class="headerlink" title="To Learn More …"></a>To Learn More …</h4><p>Long Range Arena:A Benchmark for Efficient Transformers  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2011.04006">https://arxiv.org/abs/2011.04006</a></p>
+<p>Efficient Transformers:A Survey  <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2009.06732">https://arxiv.org/abs/2009.06732</a></p>
 
     </div>
 
@@ -545,7 +755,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Guidance"><span class="nav-number">1.1.</span> <span class="nav-text">General Guidance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Regression"><span class="nav-number">1.1.1.</span> <span class="nav-text">Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification"><span class="nav-number">1.1.2.</span> <span class="nav-text">Classification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structured-Learning"><span class="nav-number">1.1.3.</span> <span class="nav-text">Structured Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-find-a-function"><span class="nav-number">1.1.4.</span> <span class="nav-text">How to find a function?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Backpropagation"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Hyper parameters</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-models"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Linear models</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activation-function"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Activation function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Update-amp-Epoch"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">Update &amp; Epoch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Fully-Connect-Feedforward-Network"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">Fully Connect Feedforward Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Convolutional-Neural-Network-CNN"><span class="nav-number">1.1.4.7.</span> <span class="nav-text">Convolutional Neural Network(CNN)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#When-Gradient-Is-Small-Local-Minimum-and-Saddle-Point"><span class="nav-number">1.2.</span> <span class="nav-text">When Gradient Is Small: Local Minimum and Saddle Point</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-Fails-because-%E2%80%A6%E2%80%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text">Optimization Fails because ……</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#critical-point"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">critical point</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#which-one"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">which one?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hessian"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Hessian</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Don%E2%80%99t-afraid-of-saddle-point"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">Don’t afraid of saddle point?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Saddle-Point-v-s-Local-Minima"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">Saddle Point v.s. Local Minima</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-for-training-Batch-and-Momentum"><span class="nav-number">1.3.</span> <span class="nav-text">Tips for training:Batch and Momentum</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-with-Batch"><span class="nav-number">1.3.1.</span> <span class="nav-text">Optimization with Batch</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Shuffle"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">Shuffle</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Small-Batch-v-s-Large-Batch"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Small Batch v.s. Large Batch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Have-both-fish-and-bear%E2%80%99s-paws"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">Have both fish and bear’s paws?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Momentum"><span class="nav-number">1.3.2.</span> <span class="nav-text">Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Concluding-Remarks"><span class="nav-number">1.3.3.</span> <span class="nav-text">Concluding Remarks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tips-for-training-Adaptive-Learning-Rate"><span class="nav-number">1.4.</span> <span class="nav-text">Tips for training:Adaptive Learning  Rate</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Root-Mean-Square"><span class="nav-number">1.4.1.</span> <span class="nav-text">Root Mean Square</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-rate-adapts-dynamically"><span class="nav-number">1.4.2.</span> <span class="nav-text">Learning rate adapts dynamically</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RMSProp"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Adam"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-Rate-Scheduling"><span class="nav-number">1.4.3.</span> <span class="nav-text">Learning Rate Scheduling</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Learning-Rate-Decay"><span class="nav-number">1.4.3.1.</span> <span class="nav-text">Learning Rate Decay</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Warm-Up"><span class="nav-number">1.4.3.2.</span> <span class="nav-text">Warm Up</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary-of-Optimization"><span class="nav-number">1.4.4.</span> <span class="nav-text">Summary of Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Vanilla-Gradient-Descent"><span class="nav-number">1.4.4.1.</span> <span class="nav-text">(Vanilla)Gradient Descent</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Various-Improvements"><span class="nav-number">1.4.4.2.</span> <span class="nav-text">Various Improvements</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Function-Classification"><span class="nav-number">1.5.</span> <span class="nav-text">Loss Function: Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification-as-Regression"><span class="nav-number">1.5.1.</span> <span class="nav-text">Classification as Regression ?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Class-as-one-hot-vector"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">Class as one-hot vector</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Regression-1"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Regression</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Classification-1"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">Classification</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Softmax"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">Softmax</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Loss-of-Classification"><span class="nav-number">1.5.2.</span> <span class="nav-text">Loss of Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Mean-Square-Error-MSE"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">Mean Square Error(MSE)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Cross-entropy"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">Cross-entropy</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Quick-Introduction-of-Bath-Normalization"><span class="nav-number">1.6.</span> <span class="nav-text">Quick Introduction of Bath Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Changing-Landscape"><span class="nav-number">1.6.1.</span> <span class="nav-text">Changing Landscape</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Feature-Normalization"><span class="nav-number">1.6.2.</span> <span class="nav-text">Feature Normalization</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Considering-Deep-Learning"><span class="nav-number">1.6.2.1.</span> <span class="nav-text">Considering Deep Learning</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Batch-normalization"><span class="nav-number">1.6.2.2.</span> <span class="nav-text">Batch normalization</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Batch-normalization-Testing"><span class="nav-number">1.6.2.3.</span> <span class="nav-text">Batch normalization-Testing</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Internal-Covariate-Shift"><span class="nav-number">1.6.2.4.</span> <span class="nav-text">Internal Covariate Shift ?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#To-learn-more%E2%80%A6"><span class="nav-number">1.6.3.</span> <span class="nav-text">To learn more…</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Convolutional-Neural-Network-CNN-1"><span class="nav-number">1.7.</span> <span class="nav-text">Convolutional Neural Network(CNN)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Image-Classification"><span class="nav-number">1.7.1.</span> <span class="nav-text">Image Classification</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Observation-1"><span class="nav-number">1.7.1.1.</span> <span class="nav-text">Observation 1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Simplification-1"><span class="nav-number">1.7.1.2.</span> <span class="nav-text">Simplification 1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Simplification-1-Typical-Setting"><span class="nav-number">1.7.1.3.</span> <span class="nav-text">Simplification 1 - Typical Setting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Observation-2"><span class="nav-number">1.7.1.4.</span> <span class="nav-text">Observation 2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Simplification-2"><span class="nav-number">1.7.1.5.</span> <span class="nav-text">Simplification 2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Simplification-2-Typical-Setting"><span class="nav-number">1.7.1.6.</span> <span class="nav-text">Simplification 2 - Typical Setting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Benefit-of-Convolutional-Layer"><span class="nav-number">1.7.1.7.</span> <span class="nav-text">Benefit of Convolutional Layer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Convolutional-Layer"><span class="nav-number">1.7.1.8.</span> <span class="nav-text">Convolutional Layer</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Comparison-of-Two-Stories"><span class="nav-number">1.7.1.9.</span> <span class="nav-text">Comparison of Two Stories</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Observation-3"><span class="nav-number">1.7.1.10.</span> <span class="nav-text">Observation 3</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Pooling-Max-Pooling"><span class="nav-number">1.7.1.11.</span> <span class="nav-text">Pooling - Max Pooling</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#The-whole-CNN"><span class="nav-number">1.7.1.12.</span> <span class="nav-text">The whole CNN</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Application-Playing-Go"><span class="nav-number">1.7.2.</span> <span class="nav-text">Application:Playing Go</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Why-CNN-for-Go-playing"><span class="nav-number">1.7.2.1.</span> <span class="nav-text">Why CNN for Go playing ?</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#More-Applications"><span class="nav-number">1.7.3.</span> <span class="nav-text">More Applications</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Speech"><span class="nav-number">1.7.3.1.</span> <span class="nav-text">Speech</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Natural-Language-Processing"><span class="nav-number">1.7.3.2.</span> <span class="nav-text">Natural Language Processing</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#To-learn-more%E2%80%A6-1"><span class="nav-number">1.7.4.</span> <span class="nav-text">To learn more…</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-attention"><span class="nav-number">1.8.</span> <span class="nav-text">Self-attention</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Sophisticated-Input"><span class="nav-number">1.8.1.</span> <span class="nav-text">Sophisticated Input</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vector-Set-as-Input"><span class="nav-number">1.8.2.</span> <span class="nav-text">Vector Set as Input</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Machine-Learning"><span class="nav-number">1.</span> <span class="nav-text">Machine Learning</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Guidance"><span class="nav-number">1.1.</span> <span class="nav-text">General Guidance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Regression"><span class="nav-number">1.1.1.</span> <span class="nav-text">Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classification"><span class="nav-number">1.1.2.</span> <span class="nav-text">Classification</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Structured-Learning"><span class="nav-number">1.1.3.</span> <span class="nav-text">Structured Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-to-find-a-function"><span class="nav-number">1.1.4.</span> <span class="nav-text">How to find a function?</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Backpropagation"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">Backpropagation</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hyper-parameters"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">Hyper parameters</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Linear-models"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">Linear models</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Activation-function"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Activation function</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Update-amp-Epoch"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">Update &amp; Epoch</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Fully-Connect-Feedforward-Network"><span class="nav-number">1.1.4.6.</span> <span class="nav-text">Fully Connect Feedforward Network</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Convolutional-Neural-Network-CNN"><span class="nav-number">1.1.4.7.</span> <span class="nav-text">Convolutional Neural Network(CNN)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#When-Gradient-Is-Small-Local-Minimum-and-Saddle-Point"><span class="nav-number">1.2.</span> <span class="nav-text">When Gradient Is Small: Local Minimum and Saddle Point</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Optimization-Fails-because-%E2%80%A6%E2%80%A6"><span class="nav-number">1.2.1.</span> <span class="nav-text">Optimization Fails because ……</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#critical-point"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">critical point</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#which-one"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">which one?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hessian"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">Hessian</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Many-applications-%E2%80%A6"><span class="nav-number">1.2.2.</span> <span class="nav-text">Many applications …</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Self-attention-for-Speech"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Self-attention for Speech</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Self-attention-for-Image"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Self-attention for Image</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Self-attention-for-Graph"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">Self-attention for Graph</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Self-attention-v-s-CNN"><span class="nav-number">1.2.3.</span> <span class="nav-text">Self-attention v.s. CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Self-attention-v-s-RNN"><span class="nav-number">1.2.4.</span> <span class="nav-text">Self-attention v.s. RNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#To-Learn-More-%E2%80%A6"><span class="nav-number">1.2.5.</span> <span class="nav-text">To Learn More …</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -621,12 +831,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">7k</span>
+    <span title="站点总字数">14k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">7 分钟</span>
+    <span title="站点阅读时长">13 分钟</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
