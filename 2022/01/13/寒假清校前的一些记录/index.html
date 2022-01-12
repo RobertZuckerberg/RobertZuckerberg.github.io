@@ -20,21 +20,21 @@
     var CONFIG = {"hostname":"robertzuckerberg.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法原文链接：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1903.09569 原文开源代码：暂无 摘要人工智能领域的研究人员已经用 AI 在信息完整的大规模游戏上达到了人类水准，但要在信息不完整的大规模游戏（即战争游戏、足球教练或商业策略游戏）上实现最优结果（即近似纳什均衡）仍是一大挑战。神经虚拟自我对弈（NFSP）算法可以通过自我对弈，在">
+  <meta name="description" content="明天就要离校了，学校里愈发冷清了，现在还在学校的同学加起来可能都没有五十个吧。 操场的大灯不开了，图书馆开始闭馆，超市的货架也渐渐空了。 宿舍的走廊空空荡荡，晚上搭配上廊顶的感应灯整个就是恐怖氛围拉满。 聚雅、荟贤两个食堂从全部开放，到二楼停止营业，再到只剩荟贤一楼的一个窗口固定时间营业，现在每天吃饭都成了一件有紧迫感的事情。 前天下楼吃饭的时候阿姨说14号中午学校开始全面消杀，得今天晚上就收拾好">
 <meta property="og:type" content="article">
-<meta property="og:title" content="「论文翻译」Monte Carlo Neural Fictitious Self-Play- Approach to Approximate Nash Equilibrium of Imperfect-Information Games">
-<meta property="og:url" content="https://robertzuckerberg.github.io/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Monte%20Carlo%20Neural%20Fictitious%20Self-Play-%20Approach%20to%20Approximate%20Nash%20Equilibrium%20of%20Imperfect-Information%20Games/index.html">
+<meta property="og:title" content="寒假清校前的一些记录">
+<meta property="og:url" content="https://robertzuckerberg.github.io/2022/01/13/%E5%AF%92%E5%81%87%E6%B8%85%E6%A0%A1%E5%89%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/index.html">
 <meta property="og:site_name" content="藏室">
-<meta property="og:description" content="蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法原文链接：https:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1903.09569 原文开源代码：暂无 摘要人工智能领域的研究人员已经用 AI 在信息完整的大规模游戏上达到了人类水准，但要在信息不完整的大规模游戏（即战争游戏、足球教练或商业策略游戏）上实现最优结果（即近似纳什均衡）仍是一大挑战。神经虚拟自我对弈（NFSP）算法可以通过自我对弈，在">
+<meta property="og:description" content="明天就要离校了，学校里愈发冷清了，现在还在学校的同学加起来可能都没有五十个吧。 操场的大灯不开了，图书馆开始闭馆，超市的货架也渐渐空了。 宿舍的走廊空空荡荡，晚上搭配上廊顶的感应灯整个就是恐怖氛围拉满。 聚雅、荟贤两个食堂从全部开放，到二楼停止营业，再到只剩荟贤一楼的一个窗口固定时间营业，现在每天吃饭都成了一件有紧迫感的事情。 前天下楼吃饭的时候阿姨说14号中午学校开始全面消杀，得今天晚上就收拾好">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-12-23T02:21:43.000Z">
-<meta property="article:modified_time" content="2021-12-24T14:59:39.568Z">
+<meta property="article:published_time" content="2022-01-12T16:31:44.000Z">
+<meta property="article:modified_time" content="2022-01-12T16:33:14.836Z">
 <meta property="article:author" content="朱睿智">
+<meta property="article:tag" content="生活记录">
 <meta property="article:tag" content="机器学习">
-<meta property="article:tag" content="深度强化学习">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://robertzuckerberg.github.io/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Monte%20Carlo%20Neural%20Fictitious%20Self-Play-%20Approach%20to%20Approximate%20Nash%20Equilibrium%20of%20Imperfect-Information%20Games/">
+<link rel="canonical" href="https://robertzuckerberg.github.io/2022/01/13/%E5%AF%92%E5%81%87%E6%B8%85%E6%A0%A1%E5%89%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/">
 
 
 <script id="page-configurations">
@@ -47,7 +47,7 @@
   };
 </script>
 
-  <title>「论文翻译」Monte Carlo Neural Fictitious Self-Play- Approach to Approximate Nash Equilibrium of Imperfect-Information Games | 藏室</title>
+  <title>寒假清校前的一些记录 | 藏室</title>
   
 
 
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://robertzuckerberg.github.io/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Monte%20Carlo%20Neural%20Fictitious%20Self-Play-%20Approach%20to%20Approximate%20Nash%20Equilibrium%20of%20Imperfect-Information%20Games/">
+    <link itemprop="mainEntityOfPage" href="https://robertzuckerberg.github.io/2022/01/13/%E5%AF%92%E5%81%87%E6%B8%85%E6%A0%A1%E5%89%8D%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/author.jpg">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          「论文翻译」Monte Carlo Neural Fictitious Self-Play- Approach to Approximate Nash Equilibrium of Imperfect-Information Games
+          寒假清校前的一些记录
         </h1>
 
         <div class="post-meta">
@@ -189,23 +189,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-12-23 10:21:43" itemprop="dateCreated datePublished" datetime="2021-12-23T10:21:43+08:00">2021-12-23</time>
+              <time title="创建时间：2022-01-13 00:31:44 / 修改时间：00:33:14" itemprop="dateCreated datePublished" datetime="2022-01-13T00:31:44+08:00">2022-01-13</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-12-24 22:59:39" itemprop="dateModified" datetime="2021-12-24T22:59:39+08:00">2021-12-24</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E8%AE%BA%E6%96%87%E7%BF%BB%E8%AF%91/" itemprop="url" rel="index"><span itemprop="name">论文翻译</span></a>
+                  <a href="/categories/%E9%9A%8F%E7%AC%94/" itemprop="url" rel="index"><span itemprop="name">随笔</span></a>
                 </span>
             </span>
 
@@ -222,14 +216,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>505</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -241,9 +235,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法"><a href="#蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法" class="headerlink" title="蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法"></a>蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法</h2><p>原文链接：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1903.09569">https://arxiv.org/abs/1903.09569</a></p>
-<p>原文开源代码：暂无</p>
-<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>人工智能领域的研究人员已经用 AI 在信息完整的大规模游戏上达到了人类水准，但要在信息不完整的大规模游戏（即战争游戏、足球教练或商业策略游戏）上实现最优结果（即近似纳什均衡）仍是一大挑战。神经虚拟自我对弈（NFSP）算法可以通过自我对弈，在没有先验领域知识的情况下有效学习信息不完整游戏的近似纳什均衡。但是，它依赖于深度 Q 网络，但这种网络是离线的而且很难融入对手策略不断变化的在线游戏，因此深度 Q 网络无法在游戏中用大规模搜索和深度搜索来达到近似纳什均衡。本文中，我们提出了蒙特卡洛神经虚拟自我对弈（MC-NFSP）算法，该方法结合了蒙特卡洛树搜索和 NFSP，大大提高了模型在信息不完整的大规模零和游戏中的表现。实验证明，该算法可以利用大规模深度搜索达到 NFSP 无法实现的近似纳什均衡。此外，我们开发了异步神经虚拟自我对弈（ANFSP）算法，该算法使用异步架构和并行架构来收集游戏经验。在实验中，我们发现并行 actor-learner 能够进一步加速和稳定训练。<span id="more"></span></p>
+        <p>明天就要离校了，学校里愈发冷清了，现在还在学校的同学加起来可能都没有五十个吧。</p>
+<p>操场的大灯不开了，图书馆开始闭馆，超市的货架也渐渐空了。</p>
+<p>宿舍的走廊空空荡荡，晚上搭配上廊顶的感应灯整个就是恐怖氛围拉满。</p>
+<p>聚雅、荟贤两个食堂从全部开放，到二楼停止营业，再到只剩荟贤一楼的一个窗口固定时间营业，现在每天吃饭都成了一件有紧迫感的事情。</p>
+<p>前天下楼吃饭的时候阿姨说14号中午学校开始全面消杀，得今天晚上就收拾好东西明早起床就离校了。</p>
+<p>算起来这学期才是我在疫情时代开始的第一次学习生活，19年年末疫情爆发后大四下学期就直接是在家里度过的，在家里完成了本科毕业设计和毕业答辩。在那之后的上网课和校园封闭管理都是我没体验过的了。</p>
+<p>不过这学期丰台校区的出入校门审批制也算是校园封闭管理的一种吧，属实是被关的很难受，就更不用说全封闭了。</p>
+<p>期末的这段时间做机器学习的课程设计，最终定了「基于CNN的胸部X射线COVID-19诊断」这个题目，为此也查阅了不少论文，发现尽管我们不是医学专业的，但也能用自己的方式，用自己所学的知识为对抗疫情做一些探索和贡献。我们在习惯和病毒共处的同时，在世界上的各个角落，有很多人正在一起努力。</p>
+<p>COVID-19检测方法包括逆转录聚合酶链反应(RT-PCR) 检测和肺部医学影像检测等。 基于RT-PCR的检测技术是COVID-19爆发初期最为广泛使用的诊断手段，但其试剂盒有限且价格高，诊断耗时长，并且部分诊断结果呈假阴性，使诊断存在一定的局限性。</p>
+<p> 肺部医学影像检测中，临床广泛使用的医学成像主要有X射线、计算机断层扫描(CT)以及核磁共振成像等。目前针对新冠肺炎的辅助诊疗手段主要是胸部X射线(CXR)图像和CT。</p>
+<p>以胸部CT为例，COVID-19的影像诊断工作流程一般包括三个阶段，即：扫描前准备；图像采集；疾病诊断。</p>
+<p>然而，传统的成像工作流程要求技术人员和病人之间有不可避免的接触。特别是在病人定位时，技术人员需要协助病人摆好姿势，并手动调整病人和设备之间的相对位置。这个过程使技术人员与病人密切接触，导致了病毒暴露的高风险。因此，需要一个无接触和自动化的成像工作流程来尽量减少接触。</p>
+<p>有研究人员建立了一个具有基于AI的预扫描和诊断系统的完全独立的移动CT平台，它被重新设计成一个完全隔离的扫描室和控制室。每个房间都有自己的入口，以避免技师和患者之间不必要的互动。进入扫描室后，通过视觉和音频提示指示患者在病床上摆姿势。技术人员可以通过窗户观察扫描室天花板上安装的AI摄像头传输的实时视频，并在必要时纠正患者的姿势。</p>
+<p>同时，AI还可以帮助提高扫描质量并减少患者的辐射剂量消耗。例如，X射线曝光参数可以根据AI推断的患者身体部位厚度自动计算和优化，确保在扫描过程中使用正确的辐射量，这对于低剂量成像尤其重要。</p>
+<p>此外，分割也是人工智能应用于COVID-19图像处理和分析的一个重要领域。它能在胸部X光或CT图像中划出感兴趣的区域（ROI），如肺部、肺叶、支气管肺段和感染区或病变，以便进一步评估和量化。</p>
+<p>CT为检测COVID-19提供高质量的三维图像。深度学习被广泛使用于在CT中分割ROI。流行的COVID-19的分割网络包括经典的U-Net , UNet++ , VB-Net。与CT相比，X射线虽然更容易获得，但由于肋骨投射到二维的软组织上从而混淆了图像对比度，X射线图像的分割更具挑战性。目前，还没有为COVID-19开发出分割X射线图像的方法。</p>
+<p>疑似COVID-19的病人迫切需要诊断和适当的治疗。由于获取速度快，X光和CT扫描被广泛用于为放射科医生提供证据。然而，医学图像，特别是胸部CT，包含数百个切片，专家需要很长的时间来进行诊断。同时，COVID-19作为一种新的疾病，与其他各种类型的肺炎有着相似的表现，这就要求放射科医生积累许多经验，以达到高诊断效果。因此，利用医学图像进行人工智能辅助诊断是非常必要的。</p>
+<p>我所做的「基于CNN的胸部X射线COVID-19诊断」就属于人工智能辅助诊断的一种。</p>
+<p>卷积神经网络(CNN)具有优异的特征提取能力，被广泛应用于计算机视觉领域。而胸部X射线COVID-19诊断其本质属于图像分类中的二分类问题。</p>
+<p>因此我选用了VGG19网络以及GitHub和Kaggle上的公开数据集来进行实验。</p>
+<p>VGG<sup><a href="#fn_1" id="reffn_1">1</a></sup>是牛津大学计算机视觉组中提出的一个卷积神经网络(CNN)模型。该模型在ImageNet中取得了92.7%的top-5测试准确率。VGG19网络拥有16个卷积层和3个全连接层。</p>
+<p>将胸部X射线图片调整为VGG19模型适用的224px*224px大小作为模型的输入，并在基础VGG19的模型上应用迁移学习，加载基础VGG19在ImageNet数据集上训练好的权重，最后将构建好的模型进行训练。</p>
+<p>实验结果表明，在用感染者和非感染者的胸部X射线图像进行了500次训练后，VGG19网络在胸部X射线COVID-19诊断上最终达到了0.94的准确率。</p>
+<p>国内外的研究人员也针对胸部X射线COVID-19诊断提出了多种网络模型，其中ResNet50模型以98.0%的准确率实现了最高的分类性能。</p>
+<p>当然，目前许多人工智能的分割和诊断研究都是基于小样本的，这可能导致结果的过度拟合。所以为了使结果在临床上有用，需要进一步提高数据的质量和数量。因此，应建立更多的数据集，包括临床收集的X射线和CT图像。</p>
+<h5 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h5><blockquote id="fn_1">
+<sup>1</sup>. Very Deep Convolutional Networks for Large-Scale Image Recognition:<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1409.1556">https://arxiv.org/abs/1409.1556</a><a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
+</blockquote>
 
     </div>
 
@@ -272,8 +291,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/%E7%94%9F%E6%B4%BB%E8%AE%B0%E5%BD%95/" rel="tag"><i class="fa fa-tag"></i> 生活记录</a>
               <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
-              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/" rel="tag"><i class="fa fa-tag"></i> 深度强化学习</a>
           </div>
 
         
@@ -282,13 +301,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/12/23/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0%20Towards%20Playing%20Full%20MOBA%20Games%20with%20Deep%20Reinforcement%20Learning/" rel="prev" title="「论文翻译」Towards Playing Full MOBA Games with Deep Reinforcement Learning">
-      <i class="fa fa-chevron-left"></i> 「论文翻译」Towards Playing Full MOBA Games with Deep Reinforcement Learning
+    <a href="/2021/12/31/2021/" rel="prev" title="二零二一">
+      <i class="fa fa-chevron-left"></i> 二零二一
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/12/25/ML%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="「学习笔记」Machine Learning 2021 Spring 台湾大学 李宏毅">
-      「学习笔记」Machine Learning 2021 Spring 台湾大学 李宏毅 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -347,7 +363,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%92%99%E7%89%B9%E5%8D%A1%E6%B4%9B%E7%A5%9E%E7%BB%8F%E8%99%9A%E6%9E%84%E8%87%AA%E6%88%91%E5%8D%9A%E5%BC%88%E2%80%94%E4%B8%8D%E5%AE%8C%E5%85%A8%E4%BF%A1%E6%81%AF%E5%8D%9A%E5%BC%88%E7%9A%84%E8%BF%91%E4%BC%BC%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">蒙特卡洛神经虚构自我博弈—不完全信息博弈的近似纳什均衡的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.1.</span> <span class="nav-text">摘要</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -486,59 +502,6 @@
   
 
   
-      
-
-<script>
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-    
 
   
 
